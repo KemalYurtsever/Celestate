@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Celestate</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="navbar">
+    <h1>Celestate</h1>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#listings">Listings</a>
+      <a href="login.html">Contact</a>
+
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h2>Find Your Next Home in North Cyprus</h2>
+
+      <p>
+        Browse apartments, villas, and student flats from verified property listings.
+      </p>
+
+      <button>View Listings</button>
+    </section>
+
+   <section class="listings-section" id="listings">
+  <div class="section-header">
+    <h2>Featured Listings</h2>
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search by title or location..."
+    >
+    <!-- number to text for stronger validations also maxlength="7" so we can not write numbers more than one million (9999999999999999)-->
+    <input
+    
+      type="text" 
+      id="maxPriceInput"
+      placeholder="Max price..."
+      inputmode ="numeric"
+      maxlength ="7"
+      step="5000"
+    >
+    <select id="sortSelect">
+      <option value="default">Default sorting</option>
+      <option value="price-low-high">Price: Low to High</option>
+      <option value="price-high-low">Price: High to Low</option>
+    
+    </select>
+    <p id="priceError" class="error-message"></p>
+  </div>
+
+  <div class="listings-container" id="listingsContainer"></div>
+  <div class="pagination" id="pagination"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
