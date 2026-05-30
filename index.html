@@ -17,8 +17,7 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="#listings">Listings</a>
-      <a href="login.html">Contact</a>
-
+      <span id="navAuthArea"><a href="login.html">Login</a></span>
     </nav>
   </header>
 
@@ -30,7 +29,7 @@
         Browse apartments, villas, and student flats from verified property listings.
       </p>
 
-      <button>View Listings</button>
+      <button type="button" id="heroBrowseButton">View Listings</button>
     </section>
 
    <section class="listings-section" id="listings">
@@ -64,7 +63,507 @@
   <div class="listings-container" id="listingsContainer"></div>
   <div class="pagination" id="pagination"></div>
     </section>
+
+    <section class="favorites-section" id="favorites" hidden>
+      <div class="favorites-header">
+        <div>
+          <p class="section-kicker">Customer area</p>
+          <h2>My Favorites</h2>
+          <p>Properties saved with the heart button will appear here.</p>
+        </div>
+        <button type="button" class="secondary-action-button" id="showAllListingsButton">Back to Listings</button>
+      </div>
+
+      <p class="favorites-count" id="favoritesCount"></p>
+      <div class="listings-container favorites-container" id="favoritesContainer"></div>
+    </section>
+
+
+    <section class="agent-section" id="agentDashboard" hidden>
+      <div class="agent-header">
+        <div>
+          <p class="section-kicker">Agent area</p>
+          <h2>Agent Dashboard</h2>
+          <p>Manage your listings, review status, track performance, and submit new properties.</p>
+        </div>
+
+        <div class="agent-header-actions">
+          <button type="button" class="secondary-action-button" id="agentManageRefreshButton">Refresh listings</button>
+          <button type="button" class="secondary-action-button" id="agentResetFormButton">Reset form</button>
+        </div>
+      </div>
+
+      <p class="agent-notice-banner" id="agentNoticeBanner"></p>
+
+
+
+      <section class="agent-panel agent-messages-panel" id="agentMessagesPanel">
+        <div class="agent-panel-header agent-panel-header--wide">
+          <div>
+            <p class="section-kicker">Function 5</p>
+            <h3>Manage Messages</h3>
+          </div>
+
+          <div class="agent-panel-actions">
+            <button type="button" class="secondary-action-button" id="agentMarkAllMessagesReadButton">Mark All as Read</button>
+            <button type="button" class="agent-submit-button agent-small-button" id="agentNewMessageButton">+ New Message</button>
+          </div>
+        </div>
+
+        <p class="agent-panel-description">Communicate with buyers, send updates, and keep every conversation linked to the correct property listing.</p>
+
+        <div class="agent-message-toolbar">
+          <input type="text" id="agentMessageSearchInput" placeholder="Search messages, buyers, emails, or listings...">
+          <select id="agentMessageListingFilter">
+            <option value="all">All Listings</option>
+          </select>
+          <select id="agentMessageStatusFilter">
+            <option value="all">All Conversations</option>
+            <option value="new">New</option>
+            <option value="in-progress">In Progress</option>
+            <option value="closed">Closed</option>
+            <option value="spam">Spam</option>
+          </select>
+        </div>
+
+        <div class="agent-message-workspace">
+          <aside class="agent-conversation-sidebar">
+            <div class="agent-message-tabs" role="tablist" aria-label="Message filters">
+              <button type="button" class="active" data-agent-message-tab="all">All</button>
+              <button type="button" data-agent-message-tab="unread">Unread</button>
+              <button type="button" data-agent-message-tab="favorites">Favorites</button>
+            </div>
+            <div id="agentConversationList" class="agent-conversation-list"></div>
+          </aside>
+
+          <section class="agent-chat-panel" id="agentChatPanel">
+            <div class="agent-chat-empty">
+              <h4>Select a conversation</h4>
+              <p>Choose a buyer message from the left side to view the conversation and reply.</p>
+            </div>
+          </section>
+
+          <aside class="agent-message-details-panel" id="agentMessageDetailsPanel">
+            <div class="agent-chat-empty">
+              <h4>Conversation details</h4>
+              <p>Buyer, property, labels, and notes appear here.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+
+      <section class="agent-panel agent-leads-panel" id="agentLeadsPanel">
+        <div class="agent-panel-header agent-panel-header--wide">
+          <div>
+            <p class="section-kicker">Function 6</p>
+            <h3>Manage Leads</h3>
+          </div>
+
+          <div class="agent-panel-actions">
+            <button type="button" class="secondary-action-button" id="agentExportLeadsButton">Export</button>
+            <button type="button" class="agent-submit-button agent-small-button" id="agentAddLeadButton">+ Add Lead</button>
+          </div>
+        </div>
+
+        <p class="agent-panel-description">Track buyers from inquiries, update their pipeline status, add notes, and convert qualified leads into clients.</p>
+
+        <div class="agent-lead-summary" id="agentLeadSummary"></div>
+
+        <div class="agent-lead-toolbar">
+          <input type="text" id="agentLeadSearchInput" placeholder="Search leads by name, email, phone, listing, source, or notes...">
+
+          <select id="agentLeadStatusFilter">
+            <option value="all">All Status</option>
+            <option value="new">New</option>
+            <option value="contacted">Contacted</option>
+            <option value="qualified">Qualified</option>
+            <option value="converted">Converted</option>
+            <option value="lost">Lost</option>
+          </select>
+
+          <select id="agentLeadSourceFilter">
+            <option value="all">All Sources</option>
+            <option value="Website">Website</option>
+            <option value="Property Inquiry">Property Inquiry</option>
+            <option value="Referral">Referral</option>
+            <option value="Open House">Open House</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Manual Entry">Manual Entry</option>
+          </select>
+
+          <button type="button" class="secondary-action-button" id="agentResetLeadFiltersButton">Reset filters</button>
+        </div>
+
+        <div id="agentLeadsContainer"></div>
+        <div class="agent-lead-pagination" id="agentLeadPagination"></div>
+      </section>
+
+
+      <section class="agent-panel agent-inquiries-panel" id="agentInquiriesPanel">
+        <div class="agent-panel-header agent-panel-header--wide">
+          <div>
+            <p class="section-kicker">Function 4</p>
+            <h3>Manage Inquiries</h3>
+          </div>
+
+          <div class="agent-panel-actions">
+            <button type="button" class="secondary-action-button" id="agentExportInquiriesButton">Export</button>
+            <button type="button" class="secondary-action-button" id="agentResetInquiryFiltersButton">Reset filters</button>
+          </div>
+        </div>
+
+        <p class="agent-panel-description">View buyer inquiries, filter conversations, reply to customers, and update inquiry status from one place.</p>
+
+        <div class="agent-inquiry-summary" id="agentInquirySummary"></div>
+
+        <div class="agent-inquiry-toolbar">
+          <input type="text" id="agentInquirySearchInput" placeholder="Search by buyer, email, phone, listing, or message...">
+
+          <select id="agentInquiryStatusFilter">
+            <option value="all">All Status</option>
+            <option value="new">New</option>
+            <option value="in-progress">In Progress</option>
+            <option value="closed">Closed</option>
+            <option value="spam">Spam</option>
+          </select>
+
+          <select id="agentInquiryListingFilter">
+            <option value="all">All Listings</option>
+          </select>
+        </div>
+
+        <div id="agentInquiriesContainer"></div>
+        <div class="agent-inquiry-pagination" id="agentInquiryPagination"></div>
+      </section>
+
+      <section class="agent-panel agent-manage-panel" id="agentManagePanel">
+        <div class="agent-panel-header agent-panel-header--wide">
+          <div>
+            <p class="section-kicker">Function 2</p>
+            <h3>Manage Listings</h3>
+          </div>
+
+          <div class="agent-panel-actions">
+            <button type="button" class="secondary-action-button" id="agentExportListingsButton">Export</button>
+            <button type="button" class="agent-submit-button agent-small-button" id="agentAddNewListingButton">+ Add New Listing</button>
+          </div>
+        </div>
+
+        <p class="agent-panel-description">View, search, filter, update, duplicate, or delete your property listings from one place.</p>
+
+        <div class="agent-manage-summary" id="agentManageSummary"></div>
+
+        <div class="agent-manage-toolbar">
+          <input type="text" id="agentListingSearchInput" placeholder="Search listings...">
+
+          <select id="agentStatusFilter">
+            <option value="all">All Status</option>
+            <option value="approved">Active</option>
+            <option value="pending">Pending Approval</option>
+            <option value="rejected">Rejected</option>
+            <option value="archived">Archived</option>
+            <option value="draft">Draft</option>
+          </select>
+
+          <select id="agentTypeFilter">
+            <option value="all">All Types</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="House">House</option>
+            <option value="Studio">Studio</option>
+            <option value="Penthouse">Penthouse</option>
+            <option value="Flat">Flat</option>
+          </select>
+        </div>
+
+        <div id="agentManageListingsContainer"></div>
+        <div class="agent-manage-pagination" id="agentManagePagination"></div>
+      </section>
+
+      <div class="agent-dashboard-grid">
+        <section class="agent-panel agent-form-panel agent-add-listing-panel" id="agentListingFormPanel">
+          <div class="agent-add-header">
+            <div>
+              <p class="section-kicker">Function 3</p>
+              <h3 id="agentFormTitle">Add New Listing</h3>
+              <p id="agentFormSubtitle">Create a detailed property record and either save it as a draft or submit it for admin approval.</p>
+            </div>
+
+            <div class="agent-form-toolbar">
+              <button type="button" class="secondary-action-button" id="agentSaveDraftButton">Save as Draft</button>
+              <button type="submit" form="agentListingForm" class="agent-submit-button agent-small-button" id="agentSubmitForApprovalTopButton">Submit for Approval</button>
+            </div>
+          </div>
+
+          <div class="agent-step-progress" aria-label="Add listing progress">
+            <div class="agent-step active"><span>1</span><strong>Basic Information</strong></div>
+            <div class="agent-step"><span>2</span><strong>Property Details</strong></div>
+            <div class="agent-step"><span>3</span><strong>Media</strong></div>
+            <div class="agent-step"><span>4</span><strong>Location</strong></div>
+            <div class="agent-step"><span>5</span><strong>Review &amp; Submit</strong></div>
+          </div>
+
+          <form id="agentListingForm" class="agent-listing-form agent-add-listing-form">
+            <input type="hidden" id="agentEditingSubmissionId" value="">
+
+            <div class="agent-add-grid">
+              <section class="agent-form-section">
+                <h4>Basic Information</h4>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingTitleInput">Listing Title <span>*</span></label>
+                  <input type="text" id="agentListingTitleInput" placeholder="Example: Modern Sea View Villa" required>
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingTypeInput">Property Type <span>*</span></label>
+                  <select id="agentListingTypeInput" required>
+                    <option value="">Select type</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Villa">Villa</option>
+                    <option value="House">House</option>
+                    <option value="Studio">Studio</option>
+                    <option value="Penthouse">Penthouse</option>
+                    <option value="Flat">Flat</option>
+                    <option value="Land">Land</option>
+                  </select>
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingListingTypeInput">Listing Type <span>*</span></label>
+                  <select id="agentListingListingTypeInput" required>
+                    <option value="For Sale">For Sale</option>
+                    <option value="For Rent">For Rent</option>
+                  </select>
+                </div>
+
+                <div class="agent-two-columns">
+                  <div class="form-group agent-field">
+                    <label for="agentListingBedroomsInput">Bedrooms</label>
+                    <input type="number" id="agentListingBedroomsInput" min="0" max="20" placeholder="4" required>
+                  </div>
+
+                  <div class="form-group agent-field">
+                    <label for="agentListingBathroomsInput">Bathrooms</label>
+                    <input type="number" id="agentListingBathroomsInput" min="1" max="20" placeholder="3" required>
+                  </div>
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingDescriptionInput">Description <span>*</span></label>
+                  <textarea id="agentListingDescriptionInput" rows="6" placeholder="Describe the property, location, benefits, and condition." required></textarea>
+                </div>
+
+                <div class="agent-form-section compact-section">
+                  <h4>Property Features</h4>
+                  <div class="agent-feature-grid">
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Air Conditioning" checked> Air Conditioning</label>
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Swimming Pool"> Swimming Pool</label>
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Parking" checked> Parking</label>
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Sea View"> Sea View</label>
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Garden"> Garden</label>
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Balcony"> Balcony</label>
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Furnished"> Furnished</label>
+                    <label><input type="checkbox" class="agent-feature-checkbox" value="Storage Room"> Storage Room</label>
+                  </div>
+
+                  <div class="form-group agent-field custom-feature-field">
+                    <label for="agentListingFeaturesInput">Additional custom features</label>
+                    <input type="text" id="agentListingFeaturesInput" placeholder="Example: Fireplace, Smart home, Gym">
+                    <small>Separate additional features with commas.</small>
+                  </div>
+                </div>
+              </section>
+
+              <section class="agent-form-section">
+                <h4>Pricing Information</h4>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingPriceInput">Price (£) <span>*</span></label>
+                  <input type="number" id="agentListingPriceInput" min="1" max="1000000" placeholder="850000" required>
+                </div>
+
+                <div class="agent-two-columns agent-negotiable-row">
+                  <div class="form-group agent-field">
+                    <label for="agentListingPricePerSqftInput">Price per Sqft (£)</label>
+                    <input type="number" id="agentListingPricePerSqftInput" min="0" placeholder="350">
+                  </div>
+                  <label class="agent-toggle-field">
+                    <span>Negotiable</span>
+                    <input type="checkbox" id="agentListingNegotiableInput" checked>
+                  </label>
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingYearlyTaxInput">Yearly Tax (£)</label>
+                  <input type="number" id="agentListingYearlyTaxInput" min="0" placeholder="1200">
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingServiceChargeInput">Service Charge Monthly (£)</label>
+                  <input type="number" id="agentListingServiceChargeInput" min="0" placeholder="150">
+                </div>
+
+                <h4>Property Details</h4>
+
+                <div class="agent-two-columns">
+                  <div class="form-group agent-field">
+                    <label for="agentListingAreaInput">Property Size (m²) <span>*</span></label>
+                    <input type="number" id="agentListingAreaInput" min="10" max="2000" placeholder="165" required>
+                  </div>
+
+                  <div class="form-group agent-field">
+                    <label for="agentListingLandAreaInput">Land Area (m²)</label>
+                    <input type="number" id="agentListingLandAreaInput" min="0" placeholder="500">
+                  </div>
+                </div>
+
+                <div class="agent-two-columns">
+                  <div class="form-group agent-field">
+                    <label for="agentListingYearBuiltInput">Year Built</label>
+                    <input type="number" id="agentListingYearBuiltInput" min="1900" max="2030" placeholder="2021">
+                  </div>
+
+                  <div class="form-group agent-field">
+                    <label for="agentListingFloorInput">Floor Number</label>
+                    <input type="number" id="agentListingFloorInput" min="0" max="100" placeholder="1">
+                  </div>
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingFurnishingInput">Furnishing</label>
+                  <select id="agentListingFurnishingInput">
+                    <option value="Unspecified">Unspecified</option>
+                    <option value="Fully Furnished">Fully Furnished</option>
+                    <option value="Semi Furnished">Semi Furnished</option>
+                    <option value="Unfurnished">Unfurnished</option>
+                  </select>
+                </div>
+
+                <h4>Location &amp; Contact</h4>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingLocationInput">Location <span>*</span></label>
+                  <input type="text" id="agentListingLocationInput" placeholder="Example: Kyrenia, North Cyprus" required>
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingPhoneInput">Agent Phone <span>*</span></label>
+                  <input type="tel" id="agentListingPhoneInput" placeholder="Example: +90 533 123 45 67" required>
+                </div>
+
+                <h4>Additional Details</h4>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingReferenceInput">Reference ID</label>
+                  <input type="text" id="agentListingReferenceInput" placeholder="Example: CLS-1254">
+                </div>
+
+                <div class="form-group agent-field">
+                  <label for="agentListingVideoUrlInput">Video Tour URL</label>
+                  <input type="url" id="agentListingVideoUrlInput" placeholder="https://youtu.be/example">
+                </div>
+              </section>
+            </div>
+
+            <p id="agentFormMessage" class="form-message"></p>
+
+            <div class="agent-form-actions agent-form-actions-final">
+              <button type="button" class="secondary-action-button" id="agentCancelEditButton" hidden>Cancel Edit</button>
+              <button type="submit" class="agent-submit-button" id="agentSubmitListingButton">Submit for Approval →</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="agent-panel agent-submissions-panel">
+          <div class="agent-panel-header">
+            <div>
+              <p class="section-kicker">Listing workflow</p>
+              <h3>My Listing Submissions</h3>
+            </div>
+            <p>Track the review status of properties you submitted.</p>
+          </div>
+
+          <div id="agentListingsContainer" class="agent-listings-container"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="admin-section" id="adminDashboard" hidden>
+      <div class="admin-header">
+        <div>
+          <p class="section-kicker">Admin console</p>
+          <h2>Management Dashboard</h2>
+          <p>Review users, moderate listings, and monitor platform activity from one place.</p>
+        </div>
+
+        <button type="button" class="secondary-action-button" id="adminRefreshButton">Refresh dashboard</button>
+      </div>
+
+      <p class="admin-notice-banner" id="adminNoticeBanner"></p>
+
+      <div class="admin-summary-grid" id="adminSummaryGrid"></div>
+
+      <div class="admin-panels-grid">
+        <section class="admin-panel">
+          <div class="admin-panel-header">
+            <div>
+              <p class="section-kicker">REQ-35 to REQ-37</p>
+              <h3>User Management</h3>
+            </div>
+            <p>Activate accounts and change roles without leaving the dashboard.</p>
+          </div>
+          <div id="adminUsersContainer"></div>
+        </section>
+
+        <section class="admin-panel">
+          <div class="admin-panel-header">
+            <div>
+              <p class="section-kicker">REQ-38 to REQ-42</p>
+              <h3>Listing Moderation</h3>
+            </div>
+            <p>Review pending submissions, approve or reject them, and archive or delete any listing.</p>
+          </div>
+          <div id="adminListingsContainer"></div>
+        </section>
+      </div>
+
+      <div class="admin-panels-grid admin-panels-grid--analytics">
+        <section class="admin-panel">
+          <div class="admin-panel-header">
+            <div>
+              <p class="section-kicker">REQ-43 to REQ-46</p>
+              <h3>Analytics Dashboard</h3>
+            </div>
+            <p>Track listing status, user growth, listing popularity, and inquiry trends.</p>
+          </div>
+          <div id="adminAnalyticsContainer"></div>
+        </section>
+
+        <section class="admin-panel">
+          <div class="admin-panel-header">
+            <div>
+              <p class="section-kicker">Platform notes</p>
+              <h3>Workflow snapshot</h3>
+            </div>
+            <p>All admin actions are stored locally in this demo.</p>
+          </div>
+          <div class="admin-notes">
+            <p>Approve a submission to make it publicly visible, reject it with a reason, or archive it when it should stay hidden.</p>
+            <p>Admin notifications are surfaced inside the dashboard after every moderation decision.</p>
+          </div>
+        </section>
+      </div>
+    </section>
   </main>
+
+  <div class="modal-overlay" id="listingDetailsModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button type="button" class="modal-close" id="closeModalButton" aria-label="Close listing details">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -2,64 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Login | Celestate</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-  <header class="navbar">
-    <h1>Celestate</h1>
+<body class="login-page-body">
+  <main class="login-shell">
+    <section class="login-layout" aria-label="Celestate login page">
+      <div class="login-brand-panel">
+        <a class="login-home-link" href="index.html">Home</a>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="index.html#listings">Listings</a>
-      <a href="login.html">Login</a>
-    </nav>
-  </header>
-
-  <main class="auth-page">
-    <section class="auth-card">
-      <h2>Login to Celestate</h2>
-
-      <p class="auth-subtitle">
-        Access your saved listings and manage your properties.
-      </p>
-
-      <form id="loginForm">
-        <div class="form-group">
-          <label for="emailInput">Email</label>
-          <input
-            type="email"
-            id="emailInput"
-            placeholder="Enter your email"
-            required
-          >
+        <div class="brand-heading">
+          <div class="brand-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <h1>Celestate</h1>
         </div>
 
-        <div class="form-group">
-          <label for="passwordInput">Password</label>
-          <input
-            type="password"
-            id="passwordInput"
-            placeholder="Enter your password"
-            required
-          >
+        <div class="brand-copy">
+          <div class="brand-line"></div>
+          <h2>Manage listings, favorites and messages in one platform</h2>
+          <p>
+            For Customer, Agent and Admin roles with secure web access and a structured listing workflow.
+          </p>
         </div>
 
-        <p id="loginMessage" class="form-message"></p>
+        <div class="property-showcase" aria-label="Modern property preview">
+          <div class="showcase-sky"></div>
+          <div class="showcase-house">
+            <div class="house-roof"></div>
+            <div class="house-floor top-floor">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="house-floor bottom-floor">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="house-steps"></div>
+          </div>
+          <div class="showcase-ground"></div>
+        </div>
+      </div>
 
-        <button type="submit" class="auth-button">
-          Login
-        </button>
-      </form>
+      <div class="login-form-panel">
+        <section class="login-form-card">
+          <h2>Welcome back</h2>
+          <p class="login-subtitle">Log in to continue to your Celestate dashboard.</p>
 
-      <p class="demo-login">
-        Demo account: <strong>demo@celestate.com</strong> / <strong>123456</strong>
-      </p>
+          <div class="role-selector" role="tablist" aria-label="Choose login role">
+            <button type="button" class="role-tab active" data-role="customer">Customer</button>
+            <button type="button" class="role-tab" data-role="agent">Agent</button>
+            <button type="button" class="role-tab" data-role="admin">Admin</button>
+          </div>
+
+          <form id="loginForm">
+            <input type="hidden" id="roleInput" value="customer">
+
+            <div class="form-group light-form-group">
+              <label for="emailInput">Email address</label>
+              <input
+                type="email"
+                id="emailInput"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              >
+            </div>
+
+            <div class="form-group light-form-group">
+              <label for="passwordInput">Password</label>
+              <input
+                type="password"
+                id="passwordInput"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+            </div>
+
+            <div class="login-options">
+              <label class="remember-me">
+                <input type="checkbox" id="rememberInput">
+                <span>Remember me</span>
+              </label>
+              <button type="button" class="text-button" id="forgotPasswordButton">Forgot password?</button>
+            </div>
+
+            <p id="loginMessage" class="form-message"></p>
+
+            <button type="submit" class="auth-button primary-login-button">Log in</button>
+            <button type="button" class="google-login-button" id="googleButton">Continue with Google</button>
+          </form>
+
+          <div class="login-divider">
+            <span></span>
+            <p>or</p>
+            <span></span>
+          </div>
+
+          <p class="create-account-text">
+            Don’t have an account?
+            <button type="button" id="createAccountButton">Create one</button>
+          </p>
+
+          <div class="login-tip">
+            Tip: agents can create listings after login.
+          </div>
+
+          <details class="demo-login modern-demo-login">
+            <summary>Demo accounts</summary>
+            <p><strong>Customer:</strong> customer@celestate.com / 123456</p>
+            <p><strong>Agent:</strong> agent@celestate.com / 123456</p>
+            <p><strong>Admin:</strong> admin@celestate.com / 123456</p>
+          </details>
+        </section>
+      </div>
     </section>
   </main>
 
